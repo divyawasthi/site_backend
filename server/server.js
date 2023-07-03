@@ -5,25 +5,38 @@ const app = express();
 const path = require('path');
 const router = express.Router();
 const PORT = 8080;
+const sendMail = require('./mail')
+// const file = require('../index.html')
 
-// Configuring our data parsing
+
+// app.use('..',express.static(path.join(__dirname,'..')))
+app.use(express.static(path.join(__dirname,'..')))
+app.use(express.static(path.join(__dirname,'../form')))
 app.use(express.urlencoded({
-    extend: false
-}));
-app.use(express.json());
+  extend:false
+}))
+app.use(express.json())
+app.get('/',(req,res)=>{
+  // res.send('i am server')
+  res.sendFile(path.join(__dirname,'..','index.html'))
+})
 
-app.post('/email', (req, res) => {
-    // res.sendFile(path.join(__dirname + '/contact-us.html'));
-    //TODO
-    //send email here
-    const { name, email,message} = req.body;
-    console.log('Data: ', req.body);
+app.post('/email',(req,res)=>{
+  // console.log('data:',req.body)
+  const {name,emailid,phone,whatsapp,college,admin_no,thsirt,chapter_name} = req.body
+  sendMail(name,emailid,phone,whatsapp,
+      college,admin_no,thsirt,chapter_name, (err,data)=>{
+        if (err){
+          res.status(500).join({message:'internal Error'})
+        }
+        else{alert({message:'email sent'})}
+      }
+    )
+  res.json({message:'message received'})
+})
+// app.get('/form/forms.html',(req,res)=>{console.log('from backend');res.sendFile(path.join(__dirname,'../form','forms.html'))})
 
-    // res.json({ message: 'Message received!!!' })
-});
-const parentDirectoryPath = path.join(__dirname, '..');
-router.get('/', function(req, res) {
-  res.sendFile(path.join(parentDirectoryPath, 'index.html'));
-});
+
+// app.get("/sendemail",sendMail)
 
 app.listen(PORT, () => log('Server is starting on PORT,', 8080));

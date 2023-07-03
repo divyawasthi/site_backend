@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="./mail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <script
 src="https://code.jquery.com/jquery-3.4.1.js"
@@ -19,7 +20,11 @@ crossorigin="anonymous"></script>
   
     <div class="container">
         <form action=""" id="contactForm">
-            <h1>SRC Registration</h1> 
+          <img src="../assets/logo_site1.png" style="height:100px;width:100px"/>  
+          <h1 style="text-align: center;">SRC 
+              
+              
+              Registration</h1> 
             <div class="alert">Your message sent</div>
 
             <div class="inputBox">
@@ -69,6 +74,11 @@ crossorigin="anonymous"></script>
             
             <div class="inputBox">
               <input type="text" id="aiche" name="chapter_name" placeholder="AIChe Chapter Name of Institute..." required/>
+          </div>
+          <div>
+            <img src="../assets/heads/qrcode.jpeg" 
+            class="qrcode_img"
+            />
           </div>
             <div class="inputBox">
               ScreenShot of Payment
@@ -181,10 +191,11 @@ const storageRef = storage.ref().child('images').child(name+phone)
 
     
   }
-  const data_sent = [
+  const data_sent = {
     name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name,
-    url_links[0],url_links[1]
-  ]
+    
+  }
+
   // const folderRef = storageRef.child(name+college+fileName);
   // const folderRef2 = storageRef2.child(name+college+fileName2)
   // const uploadtask = folderRef.put(file)
@@ -218,28 +229,6 @@ saveMessages(name,
 // 					alert("There was an error :(")
 // 				}
 // 			});
-gapi.load('client',initClient)
-function initClient(){
-  gapi.client.init({
-    apiKey:'AIzaSyAXIK2TBcwuAh4_qwP_Fg_tE_-NfNQ5ctU',
-    discoveryDocs:["https://sheets.googleapis.com/$discovery/rest?version=v4"]
-  }).then(function(){
-    var values = Object.values(data_sent)
-    var params = {
-      spreadsheetId:'1L8SP5SUi4YcYFNzvZGToIp_ah5Ms31fswkCRFLJnSc0',
-      range:"Sheet1!A1:F1",
-      valueInputOption:"RAW",
-      resource:{
-        values:[values]
-      }
-    }
-    return gapi.client.sheets.spreadsheets.values.append(params)
-  }).then(function(response){
-    console.log("data sent")
-  },function(reason){
-    console.error(reason.result.error.message)
-  })
-}
 
   document.querySelector(".alert").style.display = "block";
 
