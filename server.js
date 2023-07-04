@@ -12,17 +12,17 @@ const sendMail = require('./mail')
 // import firebase from 'firebase'
 
 
-// app.use('..',express.static(path.join(__dirname,'..')))
+// app.use('..',express.static(path.join(__dirname,'.')))
 app.use(express.static(path.join(__dirname,'.')))
 app.use(express.static(path.join(__dirname,'./form')))
 app.use(express.urlencoded({
   extend:false
 }))
 app.use(express.json())
-app.get('/',(req,res)=>{
-  // res.send('i am server')
-  res.sendFile(path.join(__dirname,'./','index.html'))
-})
+// app.get('/',(req,res)=>{
+//   // res.send('i am server')
+//   res.sendFile(path.join(__dirname,'./','index.html'))
+// })
 
 app.post('/email',(req,res)=>{
   console.log('data:',req.body)
