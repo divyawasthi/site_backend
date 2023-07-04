@@ -19,13 +19,13 @@ const sendMail = (name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_na
     host:"smtp.gmail.com",
     port:587,
     auth:{
-      user:'divy.awasthi@gmail.com',
-      pass:'vprkwgonhvwzsqrr',
+      user:'contact.src.svnit@gmail.com',
+      pass:'lpfejxpvfsfsddnr',
 
     }
   })
   transporter.sendMail({
-    from:'divy.awasthi@gmail.com',
+    from:'contact.src.svnit.@gmail.com',
     to:emailid,
     subject:'SRC-23 Registration',
     text:`Thank you for registering for SRC \n
