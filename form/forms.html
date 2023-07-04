@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <script
-src="https://code.jquery.com/jquery-3.4.1.js"
-integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-crossorigin="anonymous"></script>
+		src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		crossorigin="anonymous"></script>
 <script src="https://apis.google.com/js/api.js"></script>
 <body>
   
     <div class="container">
-        <form action=""" id="contactForm">
+        <form action="" id="contactForm">
           <img src="../assets/logo_site1.png" style="height:100px;width:100px"/>  
           <h1 style="text-align: center;">SRC 
               
@@ -40,6 +40,10 @@ crossorigin="anonymous"></script>
         
         <div class="inputBox">
           <input type="tel" id="Whatsapp" placeholder="Whatsapp no..." name="whatsapp" required/>
+      </div>
+      <div class="inputBox">
+        <label for="birthday">DOB</label>
+          <input type="date" id="birthday" name="birthday" placeholder="DOB..." required>
       </div>
       
       <div class="inputBox">
@@ -99,7 +103,7 @@ crossorigin="anonymous"></script>
     <!-- </div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-
+    
     <script>
         const firebaseConfig = {
   //   copy your firebase config informations
@@ -156,6 +160,7 @@ function submitForm(e) {
   var admin_no = getElementVal("admin_no")
   var tshirt = getElementVal('tshirtsize')
   var chapter_name = getElementVal('aiche')
+  var dob = getElementVal('birthday')
   // let finalmessage = `Name : ${name} <br>  Email : ${emailid} <br>  Message : ${msgContent} <br>`;
   // var fileItem = e.target.files[0];
     // var fileName = fileItem.name ; 
@@ -163,6 +168,7 @@ function submitForm(e) {
 // console.log(name,emailid,msgContent)
 const storageRef = storage.ref().child('images').child(name+phone)
   // let fname = fileName ;
+  const src_id = name.split(' ').join('')+Math.floor(Math.random()*10000 + 1)
 // const storageRef2 = storage.ref().child('payment').child(name+phone)
   for (var i = 0 ; i< imagesfile.length ; ++i){
     const folderRef = storageRef.child(name+phone+college+imagesfile[i].name)
@@ -195,7 +201,21 @@ const storageRef = storage.ref().child('images').child(name+phone)
     name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name,
     
   }
-
+  $.post('/email', data_sent, function() {
+                console.log('Server recieved our data');
+            });
+  
+            $.ajax({
+              url:"https://api.apispreadsheets.com/data/fZUaGFtchkn5Kr3n/",
+				type:"post",
+				data:$("#contactForm").serializeArray(),
+				success: function(){
+					alert("Form Data Submitted :)")
+				},
+				error: function(){
+					alert("There was an error :(")
+				}
+			});
   // const folderRef = storageRef.child(name+college+fileName);
   // const folderRef2 = storageRef2.child(name+college+fileName2)
   // const uploadtask = folderRef.put(file)
@@ -212,12 +232,26 @@ saveMessages(name,
           
           phone,
           whatsapp,
+          dob,
           college,
           admin_no,
           tshirt,
-          chapter_name
+          chapter_name,
+          src_id
 
 );
+// Email.send({
+//     Host : "smtp.gmail.com",
+//     Username : "divy.awasthi@gmail.com",
+//     Password : "bidpqwrrmgvmxqgt",
+//     To : emailid,
+//     From : "divy.awasthi@gmail.com",
+//     Subject : "SRC Registration",
+//     Body : "Thank you for registering for src"
+// }).then(
+//   message => alert(message)
+// );
+
 // $.ajax({
 // 				url:"https://api.apispreadsheets.com/data/0pgV2tb1N3nFjcMm/",
 // 				type:"post",
@@ -246,10 +280,11 @@ const saveMessages = (name,
                       
                       phone,
                       whatsapp,
+                      dob,
                       college,
                       admin_no,
                       tshirt,
-                      chapter_name
+                      chapter_name,src_id
                     ) => {
   var newContactForm = contactFormDB.push();
 
@@ -259,10 +294,12 @@ const saveMessages = (name,
     
     phone:phone,
     whatsapp:whatsapp,
+    dob:dob,
     college:college,
     admission_no : admin_no ,
     shirtsize:tshirt, 
-    aiche_chapter:chapter_name
+    aiche_chapter:chapter_name,
+    src_id:src_id
     // image:fileimage
   });
 

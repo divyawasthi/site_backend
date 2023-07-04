@@ -1,33 +1,36 @@
 const nodemailer = require('nodemailer')
 const mailGun = require('nodemailer-mailgun-transport')
 
-const auth = {
-  auth:{
-    api_key:'divy.awasthi@gmail.com',
-    domain:'jyydptdggoqymary'
-  }
-}
 
-const transporter = nodemailer.createTransport(mailGun(auth));
+
+  
+  
+
+
+
+// module.exports = sendMail;
+
+// const transporter = nodemailer.createTransport(mailGun(auth));
 
 
 const sendMail = (name,emailid,phone,whatsapp,college,admin_no,thsirt,chapter_name) => {
-  const mailOptions = {
-      sender: 'Divy Awasthi',
-      from: 'divy.awasthi@gmail.com',
-      to: emailid,
-      subject:'SRC Registration',
-      text:  `Thankyou for registering for SRC. `
-  };
+  let testaccount = nodemailer.createTestAccount()
+  let transporter = nodemailer.createTransport({
+    host:"smtp.ethereal.email",
+    port:587,
+    auth:{
+      user:'carole.dare33@ethereal.email',
+      pass:'c3cSKKJJJ1hsm8EenK',
 
-  transporter.sendMail(mailOptions, function(err, data) {
-      if (err) {
-          console.log(err);
-      } else {
-          console.log(data)
-      }
-  });
-
+    }
+  })
+  transporter.sendMail({
+    from:'SRC SVNIT',
+    to:emailid,
+    subject:'SRC-23 Registration',
+    text:'Thankyou for registering for SRC',
+    html:''
+  })
 // Exporting the sendmail
 
 }

@@ -6,7 +6,10 @@ const path = require('path');
 const router = express.Router();
 const PORT = 8080;
 const sendMail = require('./mail')
+// const firebase = require("firebase-admin")
+// const firebase = require('firebase')
 // const file = require('../index.html')
+// import firebase from 'firebase'
 
 
 // app.use('..',express.static(path.join(__dirname,'..')))
@@ -22,7 +25,7 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/email',(req,res)=>{
-  // console.log('data:',req.body)
+  console.log('data:',req.body)
   const {name,emailid,phone,whatsapp,college,admin_no,thsirt,chapter_name} = req.body
   sendMail(name,emailid,phone,whatsapp,
       college,admin_no,thsirt,chapter_name, (err,data)=>{
