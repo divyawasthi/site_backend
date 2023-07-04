@@ -13,23 +13,32 @@ const mailGun = require('nodemailer-mailgun-transport')
 // const transporter = nodemailer.createTransport(mailGun(auth));
 
 
-const sendMail = (name,emailid,phone,whatsapp,college,admin_no,thsirt,chapter_name) => {
+const sendMail = (name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name) => {
   let testaccount = nodemailer.createTestAccount()
   let transporter = nodemailer.createTransport({
-    host:"smtp.ethereal.email",
+    host:"smtp.gmail.com",
     port:587,
     auth:{
-      user:'carole.dare33@ethereal.email',
-      pass:'c3cSKKJJJ1hsm8EenK',
+      user:'divy.awasthi@gmail.com',
+      pass:'vprkwgonhvwzsqrr',
 
     }
   })
   transporter.sendMail({
-    from:'SRC SVNIT',
+    from:'divy.awasthi@gmail.com',
     to:emailid,
     subject:'SRC-23 Registration',
-    text:'Thankyou for registering for SRC',
+    text:`Thank you for registering for SRC \n
+    Your form details are given below :\n
+    Name:${name}\n email : ${emailid} \n
+    phone:${phone} \n whatsapp:${whatsapp}\n
+    College:${college}\n admin_no:${admin_no}
+    \ntshirt-size:${tshirt}\naiche-chaptername:${chapter_name}
+    `,
     html:''
+  },function(error,info){
+    if (error){console.log(error)}
+    else {console.log(info.response)}
   })
 // Exporting the sendmail
 

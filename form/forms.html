@@ -205,23 +205,12 @@ const storageRef = storage.ref().child('images').child(name+phone)
                 console.log('Server recieved our data');
             });
   
-            $.ajax({
-              url:"https://api.apispreadsheets.com/data/fZUaGFtchkn5Kr3n/",
-				type:"post",
-				data:$("#contactForm").serializeArray(),
-				success: function(){
-					alert("Form Data Submitted :)")
-				},
-				error: function(){
-					alert("There was an error :(")
-				}
-			});
   // const folderRef = storageRef.child(name+college+fileName);
   // const folderRef2 = storageRef2.child(name+college+fileName2)
   // const uploadtask = folderRef.put(file)
   // const uploadtask2 = folderRef2.put(file2)
   // const file_url = storage
-  //             .ref("myimages")
+  //             .ref("myimages")f
   //             .child(uploadedFileName)
   //             .getDownloadURL()
   //   enable alert

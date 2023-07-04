@@ -26,9 +26,9 @@ app.get('/',(req,res)=>{
 
 app.post('/email',(req,res)=>{
   console.log('data:',req.body)
-  const {name,emailid,phone,whatsapp,college,admin_no,thsirt,chapter_name} = req.body
+  const {name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name} = req.body
   sendMail(name,emailid,phone,whatsapp,
-      college,admin_no,thsirt,chapter_name, (err,data)=>{
+      college,admin_no,tshirt,chapter_name, (err,data)=>{
         if (err){
           res.status(500).join({message:'internal Error'})
         }
