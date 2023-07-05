@@ -3,7 +3,7 @@ const express = require('express');
 const log = console.log;
 const app = express();
 const path = require('path');
-const router = express.Router();
+// const router = express.Router();
 const PORT = 8080;
 const sendMail = require('./mail')
 // const firebase = require("firebase-admin")
@@ -25,10 +25,10 @@ app.use(express.json())
 // })
 
 app.post('/email',(req,res)=>{
-  console.log('data:',req.body)
-  const {name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name} = req.body
+  // console.log('data:',req.body)
+  const {name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name,src_id,aiche_id} = req.body
   sendMail(name,emailid,phone,whatsapp,
-      college,admin_no,tshirt,chapter_name, (err,data)=>{
+      college,admin_no,tshirt,chapter_name,src_id,aiche_id,(err,data)=>{
         if (err){
           res.status(500).join({message:'internal Error'})
         }
