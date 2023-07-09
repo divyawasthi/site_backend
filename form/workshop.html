@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solo Event Registration</title>
+    <title>Workshop Registration</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <link rel="stylesheet" href="./mail.css">
@@ -19,7 +19,7 @@
 <script src="https://apis.google.com/js/api.js"></script>
 <body>
   <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -29,7 +29,7 @@
 
 body{
     width: 85%;
-    height: 170vh;
+    height: 158vh;
     background-color:rgb(2, 54, 42);
     display: flex;
     justify-content: center;
@@ -64,7 +64,7 @@ body{
     width: 89%;
     padding:0;
     /* background-color :red; */
-    height: 150vh;
+    height: 140vh;
     /* padding: 20px; */
     border-radius: 50px;
     box-shadow:  0px 5px 25px rgba(0,0,0,0.2);
@@ -180,49 +180,36 @@ margin : 0 auto;
     font-size:1.8rem;
   }
 }
-
+  
 
   </style>
     <div class="container">
-      
         <div class="form-title">
-          <img src="../assets/poster.jpg" 
-          style="filter:brightness(40%);"
-          alt="" width="100%"/>
-        <h1 style="text-align: center; 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  
-  
-  transform: translate(-50%, -50%);
-  color:white;
-        
-        
-        "
-        class="form-title col-md-10"
-        >STPC/Poster <br>Registration
-        </h1>
-        </div>  
-      <form action="" id="contactForm">
+            <img src="../assets/wORKSHOP.png" 
+            style="filter:brightness(40%);"
+            alt="" width="100%"/>
+          <h1 style="text-align: center; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    
+    transform: translate(-50%, -50%);
+    color:white;
+          
+          
+          "
+          class="form-title col-md-10"
+          >Workshop<br>Registration
+          </h1>
+          </div>
+              
+        <form action="" id="contactForm">
            
             <div class="alert">Your message sent</div>
             <div class="inputBox">
                 <input type="text" id="college" placeholder="College...." name="college" required />
             
-            </div>
-            <div class="inputBox">            
-                <label for="Event" class="inputBox"><b>Event</b></label>
-                <select id="event" name="event" size="1" name="event">
-                <option value="STPC">STPC</option>
-                <option value="Student Poster Competition">Student Poster Competiton</option>
-                <!-- <option value="l">Large(42)</option> -->
-                <!-- <option value="xl">XL(44)</option> -->
-                <!-- <option value="xxl">XXL(46)</option> -->
-              </select>
-              </div>
-              <div class="inputBox">
-                <input type="text" id="title" placeholder="Poster Title...." name="title" required/>
             </div>
             
               
@@ -241,17 +228,6 @@ margin : 0 auto;
         <div class="inputBox">
             <input type="text" id="emailid1" placeholder="Email....." name="emailid1" required/>
         </div>
-        
-      <div class="inputBox">
-        <b>Upload Abstract</b>
-        <input type="file"
-        class="inputfile"
-        id="abstract"
-        onchange="getfile(event)"
-        placeholder="Abstract"
-        accept="image/png image/jpeg" 
-        required/>
-      </div>
         
             <div class="inputBox" style="text-align:center">
                 <button type="submit" id="submit_link">Submit</button>
@@ -290,18 +266,10 @@ let cnt2 = 0;
 let imagesfile = []
 let url_links = []
 const storage = firebase.storage()
-function getfile(e){
-  for (var i = 0; i < e.target.files.length; i++) {
-        var imageFile = e.target.files[i]
-        imagesfile.push(imageFile)
-        // uploadImageAsPromise(imageFile);
-    }
 
-    // console.log(fileName)
-}
 
 // var event = getElementVal('STPC/Poster')
-var contactFormDB = firebase.database().ref('STPC/Poster');
+var contactFormDB = firebase.database().ref('Workshop');
 
 document.getElementById("contactForm").addEventListener("submit", submitForm);
 
@@ -314,8 +282,8 @@ function submitForm(e) {
   var emailid = getElementVal("emailid1"); 
   var phone = getElementVal('phone1')
   var srcid = getElementVal('srcid1')
-  var event = getElementVal('event')
-  var title = getElementVal('title')
+//   var event = getElementVal('event')
+//   var title = getElementVal('title')
   // var msgContent = getElementVal("msgContent");
   
   // let finalmessage = `Name : ${name} <br>  Email : ${emailid} <br>  Message : ${msgContent} <br>`;
@@ -328,16 +296,17 @@ function submitForm(e) {
 //   const src_id = name.split(' ').join('')+Math.floor(Math.random()*10000 + 1)
 // const storageRef2 = storage.ref().child('payment').child(name+phone)
   
-const storageRef = storage.ref().child(event).child(college+'_'+name)
-for (var i = 0 ; i< imagesfile.length ; ++i){
-    const folderRef = storageRef.child(name+college+ imagesfile[i].name)
-    const uploadtask = folderRef.put(imagesfile[i])
+// const storageRef = storage.ref().child(event).child(college+'_'+name)
+// for (var i = 0 ; i< imagesfile.length ; ++i){
+//     const folderRef = storageRef.child(name+college+ imagesfile[i].name)
+//     const uploadtask = folderRef.put(imagesfile[i])
     
-  }
+//   }
+var event = 'Workshop'
   const data_sent = {
-    college,name,srcid,phone,emailid,title,event
+    college,name,srcid,phone,emailid,event
   }
-  $.post('/solo_event', data_sent, function() {
+  $.post('/workshop', data_sent, function() {
                 console.log('Server recieved our data');
             });
   
@@ -353,7 +322,7 @@ for (var i = 0 ; i< imagesfile.length ; ++i){
   // console.log(file_url)  
   // console.log(imagesfile)
 saveMessages(
-    college,name,srcid,phone,emailid,title,event
+    college,name,srcid,phone,emailid1,event
 
 );
 // Email.send({
@@ -392,12 +361,12 @@ saveMessages(
 }
 
 const saveMessages = (
-    college,name,srcid1,phone1,emailid1,title,event
+    college,name,srcid1,phone1,emailid1,event
                     ) => {
   var newContactForm = contactFormDB.push();
 
   newContactForm.set({
-    college:college,name:name,srcid:srcid1,phone:phone1,emailid:emailid1,title:title,event:event
+    college:college,name:name,srcid:srcid1,phone:phone1,emailid:emailid1,event:event
     // image:fileimage
   });
 

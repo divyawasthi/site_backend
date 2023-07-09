@@ -9,6 +9,7 @@ const sendMail = require('./mail')
 const chemjeo = require('./chemjeo')
 const k12 = require('./k12')
 const solo = require('./solo')
+const work = require('./workshop')
 // const firebase = require("firebase-admin")
 // const firebase = require('firebase')
 // const file = require('../index.html')
@@ -18,7 +19,7 @@ const solo = require('./solo')
 // app.use('..',express.static(path.join(__dirname,'.')))
 app.use(express.static(path.join(__dirname,'.')))
 app.use(express.static(path.join(__dirname,'./form')))
-app.use(express.urlencoded({
+app.use(express.urlencoded({  
   extend:false
 }))
 app.use(express.json())
@@ -28,12 +29,10 @@ app.use(express.json())
 // })
 
 app.post('/email',(req,res)=>{
-  const values = req.body 
-  console.log(values['name'])
-  console.log('data:',req.body)
-  const {name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name,src_id,aiche_id} = req.body
+  // console.log('data:',req.body)
+  const {name,emailid,phone,whatsapp,college,admin_no,tshirt,chapter_name,src_id,aiche_id,transaction_id} = req.body
   sendMail(name,emailid,phone,whatsapp,
-      college,admin_no,tshirt,chapter_name,src_id,aiche_id,(err,data)=>{
+      college,admin_no,tshirt,chapter_name,src_id,aiche_id,transaction_id,(err,data)=>{
         if (err){
           res.status(500).join({message:'internal Error'})
         }
@@ -99,6 +98,15 @@ app.post('/solo_event',(req,res)=>{
   )
 
 
+})
+
+
+app.post('/workshop',(req,res)=>{
+  const {college,name,srcid,phone,emailid,event} = req.body 
+  work(college,name,srcid,phone,emailid,event,(err,data)=>{
+    if (err){res.status(500).join({message:'internal Error'})}
+    else {alert({message:'email sent'})}
+  })
 })
 // app.get('/form/forms.html',(req,res)=>{console.log('from backend');res.sendFile(path.join(__dirname,'../form','forms.html'))})
 

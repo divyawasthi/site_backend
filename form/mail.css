@@ -8,7 +8,7 @@
 
 body{
     width: 85%;
-    height: 200vh;
+    height: 280vh;
     background-color:rgb(2, 54, 42);
     display: flex;
     justify-content: center;
@@ -18,10 +18,24 @@ body{
     /* text-align : center; */
 
 }
+.form-title{
+    position: relative;
+    text-align: center;
+    /* color: white; */
+    /* backgrund :url(../assets/chejeo.jpg); */
+}
+.fees-text{
+    text-align:center;
+    padding-top:0.3rem;
+    padding-bottom:0.5rem;
+}
+
 .qrcode_img{
     width:240px;
     height:240px;
     text-align: center;
+    justify-self:center;
+    position: relative;
     margin : 0 auto;
     margin-left : 1.3rem;
 }
@@ -30,7 +44,7 @@ body{
     /* background-color:red; */
     width: 87%;
     /* background-color :red; */
-    height: 190vh;
+    height: 269vh;
     padding: 20px;
     border-radius: 20px;
     box-shadow:  0px 5px 25px rgba(0,0,0,0.2);
@@ -133,5 +147,10 @@ margin : 0 auto;
     }
     body{
         width : 100%;
+    }
+}
+@media (max-width:700px){
+    .fees-text{
+        font-size:0.8rem;
     }
 }
